@@ -87,3 +87,29 @@ print(f"The root found is: {root[0]}, in {root[1]} iterations.")
 print(f"The root found is: {root2[0]}, in {root2[1]} iterations.")
 
 
+def backwards_substitution(R, b):
+    n = len(b)
+    x = np.zeros(n)
+
+    for i in range(n - 1, -1, -1):
+        total = 0.0
+
+        for j in range(i + 1, n):
+            total += R[i, j] * x[j]
+
+        x[i] = (b[i] - total) / R[i, i]
+
+    return x
+
+import time
+
+start = time.perf_counter()
+
+x = backwards_substitution(R, b)
+
+end = time.perf_counter()
+
+runtime = end - start
+
+
+
